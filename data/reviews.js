@@ -5,7 +5,7 @@ module.exports = [
     title: "This is bad",
     comment: "when i bought this it broke the stove",
     rating: 1,
-    productId: 1,
+    productId: "53a0724c-a416-4cac-ae45-bfaedce1f147",
   },
   {
     id: "78851fe8-a657-410f-9b0a-2bc952636e16",
@@ -68,7 +68,7 @@ module.exports = [
     date: "2020-07-23",
     title: "idc",
     comment: "It's a spoon...",
-    rating: 3,
+    rating: 2,
     productId: "2c931e7e-510f-49e5-aed6-d6b44087e5a1",
   },
   {
