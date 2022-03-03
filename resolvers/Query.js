@@ -2,10 +2,13 @@ exports.Query = {
   hello: () => {
     return 'world'
   },
-  product: (parent, { id }, { products }) => {
+  product: (parent, { id }, { db }) => {
+    const { products } = db;
+
     return products.find((product) => product.id === id);
   },
-  products: (parent, { filter }, { products, reviews }) => {
+  products: (parent, { filter }, { db }) => {
+    const { products, reviews } = db;
     let filteredProducts = products;
 
     if (filter) {
@@ -36,8 +39,10 @@ exports.Query = {
 
     return filteredProducts;
   },
-  category: (parent, { id: categoryId }, { categories }) => {
+  category: (parent, { id: categoryId }, { db }) => {
+    const { categories } = db;
+
     return categories.find((category) => category.id === categoryId);
   },
-  categories: (parent, args, { categories }) => categories,
+  categories: (parent, args, { db }) => db.categories,
 };

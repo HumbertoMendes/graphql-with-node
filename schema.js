@@ -13,6 +13,12 @@ module.exports = gql`
     addCategory(input: AddCategoryInput!): Category!
     addProduct(input: AddProductInput!): Product!
     addReview(input: AddReviewInput!): Review!
+    deleteCategory(id: ID!): Boolean!
+    deleteProduct(id: ID!): Boolean!
+    deleteReview(id: ID!): Boolean!
+    updateCategory(id: ID!, input: UpdateCategoryInput!): Category!
+    updateProduct(id: ID!, input: UpdateProductInput!): Product!
+    updateReview(id: ID!, input: UpdateReviewInput!): Review!
   }
 
   type Product {
@@ -65,5 +71,25 @@ module.exports = gql`
     comment: String!,
     rating: Int!,
     productId: ID!,
+  }
+
+  input UpdateCategoryInput {
+    name: String
+  }
+
+  input UpdateProductInput {
+    name: String,
+    description: String,
+    quantity: Int,
+    price: Float,
+    image: String,
+    onSale: Boolean,
+    categoryId: ID,
+  }
+
+  input UpdateReviewInput {
+    title: String,
+    comment: String,
+    rating: Int,
   }
 `;
