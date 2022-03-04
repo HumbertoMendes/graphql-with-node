@@ -5,6 +5,42 @@ const typeDefs = gql`
     cars: [Car!]!
   }
 
+  type Mutation {
+    groupCarsAdd(groupId: ID!, carId: ID!),
+    groupCarsRemove(groupId: ID!, carId: ID!),
+    groupDelete(groupId: ID!): Boolean!,
+    groupPublish(groupId: ID!): Boolean!,
+    groupUnpublish(groupId: ID!): Boolean!,
+    groupCreate(
+      groupInput: GroupInput!,
+    ),
+    groupUpdate(
+      groupId: ID!,
+      groupInput: GroupInput!,
+    ): GroupUpdatePayload,
+  }
+
+  type GroupUpdatePayload {
+    userErrors: [UserErrors!]!
+    group: Group
+  }
+
+  type UserErrors {
+    message: String!,
+    field: [String!]!
+  }
+
+  input GroupInput {
+    name: String,
+    image: ImageInput,
+    description: String,
+    featureSet: GroupFeatureFields,
+  }
+
+  input ImageInput {
+    url: String!,
+  }
+
   type Car {
     id: ID!
     color: String!
@@ -13,16 +49,34 @@ const typeDefs = gql`
 
   type Group {
     id: ID!,
+    featureSet: GroupFeaturesSet,
+    hasCar(id: ID!): Boolean!,
+    cars(skip: Int!, take: Int!): [Car!]!,
+    name: String!,
+    image: Image!,
+    description: String!,
+  }
+
+  type Image {
+    id: ID!,
+    url: String!,
+  }
+
+  type GroupFeaturesSet {
     features: [GroupFeatures!]!,
     applyFeaturesSeparately: Boolean!,
-    cars: [Car!]!,
-    name: String!,
-    imageId: ID!,
-    bodyHtml: String!,
   }
 
   type GroupFeatures {
-    feature: String!,
+    feature: GroupFeatureFields!,
+  }
+
+  enum GroupFeatureFields {
+    INCLINE_ENGINE,
+    FOUR_CYLINDER_ENGINE,
+    TWIN_CYLINDER_ENGINE,
+    RED_PAINT,
+    BLACK_PAINT,
   }
 `;
 
